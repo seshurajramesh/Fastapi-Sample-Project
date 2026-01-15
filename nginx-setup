@@ -39,4 +39,4 @@ sudo firewall-cmd --reload
 
 Then.,
 
-sudo systemctl restart nginx
+sudo systemctl enable --now nginx
