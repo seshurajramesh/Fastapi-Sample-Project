@@ -54,3 +54,6 @@ uvicorn
 uvloop
 watchfiles
 websockets
+gunicorn
+httptools
+uvloop
