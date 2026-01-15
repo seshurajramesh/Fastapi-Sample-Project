@@ -24,7 +24,7 @@ docker build -t IMAGE_NAME project_directory
 
 ## Run the Docker Image with FLask
 ```
-docker run -dp 8000:8000 -w /app -v "$(pwd):/app" IMAGE-NAME sh -c "flask run --host 0.0.0.0"
+docker run -dp 8000:8000 -w /app -v "$(pwd):/app" IMAGE-NAME sh -c "uvicorn main:app --host=0.0.0.0"
 ```
 
 ## Or Run the APP by Gunicorn
