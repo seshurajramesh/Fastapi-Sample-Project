@@ -1,4 +1,4 @@
-from calculation import add,sub,mul,div,BankAccount
+from .calculation import add,sub,mul,div,BankAccount
 import pytest
 
 @pytest.fixture
