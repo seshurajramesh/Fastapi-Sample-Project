@@ -57,3 +57,5 @@ websockets
 gunicorn
 httptools
 uvloop
+pytest
+pytest-asyncio

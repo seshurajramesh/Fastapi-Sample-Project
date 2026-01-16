@@ -1,4 +1,4 @@
-from pydantic import BaseModel, EmailStr, conint
+from pydantic import BaseModel, EmailStr, conint,ConfigDict
 from typing import Optional
 from datetime import datetime
 
@@ -9,11 +9,11 @@ class PostBase(BaseModel):
     published: bool = True
 
 class PostCreate(PostBase):
+    model_config = ConfigDict(from_attributes=True)
     id: int
     created_at: datetime
     owner_id: int
-    class Config:
-        from_attributes = True
+    
 
 
 class UserBase(BaseModel):
@@ -27,22 +27,22 @@ class UserResponse(BaseModel):
     
 
 class TokenData(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
     email: Optional[EmailStr] = None
     user_id: int = None
-    class Config:
-        from_attributes = True
+    
     
 
 class Token(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
     access_token: str
     token_type: str
-    class Config:
-        from_attributes = True
+    
 
 class PostNestedUser(PostCreate):
+    model_config = ConfigDict(from_attributes=True)
     owner: UserResponse
-    class Config:
-        from_attributes = True
+    
 
 
 class VotesCreate(BaseModel):
@@ -50,8 +50,8 @@ class VotesCreate(BaseModel):
     dir: conint(le=1)
 
 class PostNestedUserVotes(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
     Post : PostNestedUser
 
     votes: int
-    class Config:
-        from_attributes = True
+    
