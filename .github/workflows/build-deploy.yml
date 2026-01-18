@@ -6,7 +6,7 @@ on:
 jobs:
   build-and-test:
     environment:
-        name: fastapi-test
+        name: fastapi-test #env name in github secrets
     env:
       DATABASE_USER: ${{ secrets.DATABASE_USER }}
       DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
@@ -70,12 +70,12 @@ jobs:
   deploy:
     needs: [ build-and-test] 
     environment:
-        name: testing
+        name: fastapi-test #env name in github secrets
     runs-on: ubuntu-latest
     steps:
       - name: pulling git-repo
         uses: actions/checkout@v2
-      - name: Execute remote SSH commands using password
+      - name: Execute remote SSH commands using password and run the docker container
         uses: appleboy/ssh-action@v1
         with:
           host: ${{ secrets.HOST }}
@@ -84,4 +84,4 @@ jobs:
           script: |
             cd /opt/app/src
             git pull origin main
-            docker compose -f docker-compose.prod.yml up
+            docker compose -f docker-compose.prod.yml up -d
