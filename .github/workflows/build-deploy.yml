@@ -4,20 +4,9 @@ on:
     - push
     - pull_request
 jobs:
-  job1:
+  build-and-test:
     environment:
         name: fastapi-test
-    env:
-        DATABASE_USER: ${{ secrets.DATABASE_USER }}
-        DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
-        DATABASE_HOST: ${{ secrets.DATABASE_HOST }}
-        DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
-        DATABASE_NAME_PYTEST: ${{ secrets.DATABASE_PYTEST }}
-        DATABASE_PORT: ${{ secrets.DATABASE_PORT }}
-        SECRET_KEY: ${{ secrets.SECRET_KEY }}
-        ALGORITHM: ${{ secrets.ALGORITHM }}
-        ACCESS_TOKEN_EXPIRE_MINUTES: ${{ secrets.ACCESS_TOKEN_EXPIRE_MINUTES }}
-
     services:
       postgres:
         image: postgres        
@@ -65,4 +54,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: seshurajramesh/fastapi-seshu:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_TOKEN }}:latest
